@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpService } from './http.service';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -15,4 +16,13 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [HttpService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule implements OnInit { 
+  constructor(private _httpService: HttpService){}
+    // ngOnInit will run when the component is initialized, after the constructor method.
+    ngOnInit(){
+      this.getTasksFromService();
+    }
+    getTasksFromService(){
+      this._httpService.getTasks();
+    }
+}
